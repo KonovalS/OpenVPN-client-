@@ -1,0 +1,21 @@
+---
+- hosts: all
+  sudo: yes
+  tasks:
+  - name: install packages
+    apt: name={{item}} state=latest update_cache=yes
+    with_items:
+    - mc
+    - openvpn
+
+  - name: copy config File
+    template: src=client.conf.j2 dest=/etc/openvpn/client.conf
+
+  - name: add OVPN to upstart
+    systemd:
+      name: openvpn
+      enabled: yes
+      state: restarted
+
+  - name: start manual
+    shell: openvpn --config /etc/openvpn/client.conf
