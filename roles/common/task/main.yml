@@ -1,9 +1,0 @@
----
-
-- name: Install packages
-  roles:
-    - install_pkg
-
-- name: Config packages
-  roles:
-    - config_pkg
