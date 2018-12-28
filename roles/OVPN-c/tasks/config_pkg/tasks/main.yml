@@ -1,0 +1,21 @@
+---
+
+- name: Copy config File
+  become: yes
+  template:
+     src="{{ item }}.j2"
+     dest=/{{ item }}
+  with_items:
+      - "etc/openvpn/client.conf"
+  tags: copy_configfile
+
+- name: add OVPN to upstart
+  become: yes
+  systemd:
+   name: openvpn
+   enabled: yes
+   state: reloaded
+  tags: load_ovpndemon
+
+#- name: start openvpn connetcion
+#  command: openvpn --config /etc/openvpn/client.conf

@@ -1,0 +1,8 @@
+---
+
+- name: install packages OpenVPN
+  apt: name={{item}} update_cache=yes
+  with_items:
+    - openvpn
+  become: yes
+  tags: install_ovpn

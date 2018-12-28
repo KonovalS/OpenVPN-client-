@@ -1,0 +1,12 @@
+---
+ - name: INSTALL
+   hosts: all
+
+   roles:
+    - install_pkg
+
+ - name: CONFIG
+   hosts: all
+   
+   roles:
+    - config_pkg
